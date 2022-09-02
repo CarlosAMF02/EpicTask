@@ -28,16 +28,13 @@ import br.com.fiap.epictaskapi.service.TaskService;
 @RestController
 @RequestMapping("/api/task")
 public class TaskController {
-
     @Autowired
     private TaskService service;
-    
     @GetMapping()
     @Cacheable("tasks")
     public Page<Task> index(@PageableDefault(size = 5) Pageable pageable){
         return service.listAll(pageable);
     }
-
     @PostMapping()
     @CacheEvict(value = "tasks", allEntries = true)
     public ResponseEntity<Task> create(@RequestBody @Valid Task task){
@@ -47,12 +44,10 @@ public class TaskController {
             .status(HttpStatus.CREATED)
             .body(task);
     }
-
     @GetMapping("{id}")
     public ResponseEntity<Task> show(@PathVariable Long id){
         return ResponseEntity.of(service.getById(id));
     }
-
     @DeleteMapping("{id}")
     @CacheEvict(value = "tasks", allEntries = true)
     public ResponseEntity<Object> destroy(@PathVariable Long id){
@@ -65,7 +60,6 @@ public class TaskController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 
     }
-
     @PutMapping("{id}")
     @CacheEvict(value = "tasks", allEntries = true)
     public ResponseEntity<Task> update (@PathVariable Long id, @RequestBody @Valid Task newTask){
@@ -81,7 +75,5 @@ public class TaskController {
 
         return ResponseEntity.ok(task);
     }
-
-    
 
 }
