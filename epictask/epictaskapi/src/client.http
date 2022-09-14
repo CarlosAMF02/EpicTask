@@ -28,9 +28,9 @@ POST http://localhost:8080/api/user/
 Content-Type: application/json
 
 {
-    "name": "Teste",
-    "email": "teste@email.com",
-    "password": "12345"
+    "name": "Joao Carlos Lima",
+    "email": "joao@fiap.com.br",
+    "password": "123"
 }
 ###
 # Deletar
@@ -38,13 +38,13 @@ DELETE http://localhost:8080/api/user/1
 Authorization: Basic admin@fiap.com.br administrador
 ###
 # Atualizar
-PUT http://localhost:8080/api/user/2
+PUT http://localhost:8080/api/user/1
 Content-Type: application/json
 Authorization: Basic admin@fiap.com.br administrador
 
 {
-    "name": "Carlos Eu",
-    "email": "rm87204@fiap.com.br"
+    "name": "Maria Pereira",
+    "email": "maria@fiap.com.br"
 }
 ###
 
