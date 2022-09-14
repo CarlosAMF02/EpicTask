@@ -1,8 +1,8 @@
 package br.com.fiap.epictaskapi.controller;
 
 import br.com.fiap.epictaskapi.model.User;
+import br.com.fiap.epictaskapi.model.UserVM;
 import br.com.fiap.epictaskapi.service.UserService;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -47,14 +47,15 @@ public class UserController {
 
     }
     @PutMapping("{id}")
-    public ResponseEntity<User> update (@PathVariable Long id, @RequestBody @Valid User newUser){
+    public ResponseEntity<User> update (@PathVariable Long id, @RequestBody @Valid UserVM newUser){
         Optional<User> optional = service.getById(id);
         if(optional.isEmpty())
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 
         User user = optional.get();
-        newUser.setId(id);
-        BeanUtils.copyProperties(newUser, user);
+        user.setId(id);
+        user.setEmail(newUser.getEmail());
+        user.setName(newUser.getName());
 
         service.save(user);
 

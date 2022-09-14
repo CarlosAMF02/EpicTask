@@ -22,7 +22,11 @@ public class SecurityConfiguration {
             .and()
             .authorizeHttpRequests()
                 .antMatchers(HttpMethod.GET, "/api/task/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/user/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/user/").permitAll()
                 .antMatchers(HttpMethod.POST, "/api/task/").authenticated()
+                .antMatchers(HttpMethod.PUT, "/api/user/**").authenticated()
+                .antMatchers(HttpMethod.DELETE, "/api/user/**").authenticated()
                 .anyRequest().denyAll()    
             .and()
                 .csrf().disable()
@@ -31,16 +35,16 @@ public class SecurityConfiguration {
         return http.build();
     } 
 
-    // @Bean
-    // public UserDetailsService users() {
-    //     UserDetails user = User.builder()
-    //         .username("rm87204@fiap.com.br")
-    //         .password("$2a$12$jkZjDv.BMVzIoR/tw7H/ZueKHvmTaCWKhvJCooVVyg08Y7T4xDVru")
-    //         .roles("USER")
-    //     .build();
+    @Bean
+    public UserDetailsService users() {
+        UserDetails user = User.builder()
+            .username("admin@fiap.com.br")
+            .password("$2a$12$37EsLNxn7bT3HWapyeFmvOMUFoceRezaz9plOD71HkufThQdCxVcS")
+            .roles("USER")
+        .build();
 
-    //     return new InMemoryUserDetailsManager(user);
-    // }
+        return new InMemoryUserDetailsManager(user);
+     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {

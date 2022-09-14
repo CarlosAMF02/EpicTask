@@ -5,8 +5,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Entity
 @Table(name = "TB_USER")
@@ -19,10 +23,12 @@ public class User {
     @Size(min = 2, message = "Um nome deve conter no mínimo 2 caracteres")
     private String name;
     @NotBlank
+    @Email
     @Size(min = 5, message = "Um e-mail deve conter no mínimo 5 caracteres")
     private String email;
     @NotBlank
-    @Size(min = 10, message = "A senha deve conter no mínimo 10 caracteres")
+    @Size(min = 3, message = "A senha deve conter no mínimo 10 caracteres")
+    @JsonProperty(access = Access.WRITE_ONLY)
     private String password;
 
     public User() {

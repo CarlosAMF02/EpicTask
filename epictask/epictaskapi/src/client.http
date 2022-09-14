@@ -7,7 +7,7 @@ DELETE http://localhost:8080/api/task/1
 # Cadastrar
 POST http://localhost:8080/api/task/
 Content-Type: application/json
-Authorization: Basic rm87204@fiap.com.br 123
+Authorization: Basic admin@fiap.com.br administrador
 
 {
     "title": "Modelar o BD",
@@ -15,3 +15,36 @@ Authorization: Basic rm87204@fiap.com.br 123
     "score": 10
 }
 ###
+
+# User
+# Listar Todos
+GET http://localhost:8080/api/user
+###
+# Detalhes
+GET http://localhost:8080/api/user/1
+###
+# Cadastrar
+POST http://localhost:8080/api/user/
+Content-Type: application/json
+
+{
+    "name": "Teste",
+    "email": "teste@email.com",
+    "password": "12345"
+}
+###
+# Deletar
+DELETE http://localhost:8080/api/user/1
+Authorization: Basic admin@fiap.com.br administrador
+###
+# Atualizar
+PUT http://localhost:8080/api/user/2
+Content-Type: application/json
+Authorization: Basic admin@fiap.com.br administrador
+
+{
+    "name": "Carlos Eu",
+    "email": "rm87204@fiap.com.br"
+}
+###
+
